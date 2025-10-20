@@ -1,0 +1,359 @@
+:root {
+    --primary-color: #007bff; /* Bleu professionnel */
+    --secondary-color: #28a745; /* Vert pour les actions */
+    --accent-color: #ffc107; /* Jaune pour l'accent */
+    --background-color: #f8f9fa; /* Fond très clair */
+    --card-bg: white;
+    --text-color: #343a40; /* Noir doux */
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.05); /* Ombre allégée */
+    --shadow-hover: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre allégée */
+}
+
+/* --- Animations de Malade --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(15px); } 
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.animated-fade-in { animation: fadeIn 0.5s ease-out; }
+.animated-slide-in { animation: slideIn 0.4s ease-out; }
+.animated-pop { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); } 
+
+
+/* --- Global Reset and Layout --- */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.hidden { display: none !important; }
+
+/* --- Centrage --- */
+.centered-text {
+    text-align: center;
+}
+.centered-buttons {
+    display: flex;
+    justify-content: center; /* Centre les groupes de boutons */
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+
+/* --- Header et Profil (Centrage du H1) --- */
+header {
+    background-color: var(--primary-color);
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 30px;
+    display: grid;
+    /* 3 colonnes: espace vide | titre centré | profil aligné à droite */
+    grid-template-columns: 1fr auto 1fr; 
+    align-items: center;
+}
+
+.header-content h1 {
+    grid-column: 2 / 3; /* Positionne H1 au centre */
+    color: white;
+    margin: 0;
+}
+
+/* Assure que la zone de profil est bien en haut à droite */
+.profile-area {
+    grid-column: 3 / 4; /* Positionne la zone de profil à droite */
+    justify-self: end;
+    position: relative; 
+}
+
+.profile-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid white;
+    padding: 8px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.profile-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px); 
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.profile-menu {
+    position: absolute;
+    top: 100%; 
+    right: 0;
+    margin-top: 10px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-hover);
+    overflow: hidden;
+    z-index: 500;
+    min-width: 180px;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.profile-menu a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.95em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.profile-menu a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+
+/* --- Boutons Génériques --- */
+button {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+button:hover {
+    background-color: #1e7e34;
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+}
+
+.secondary-btn {
+    background-color: #6c757d;
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+    margin-top: 15px;
+}
+
+.secondary-btn:hover {
+    background-color: #5a6268;
+    box-shadow: 0 8px 20px rgba(108, 117, 125, 0.4);
+}
+
+
+/* --- Contenu Principal & Écrans --- */
+.main-content {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.screen {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-light);
+    margin-top: 30px;
+}
+
+/* --- Écran des Catégories --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.category-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    border: 1px solid #eee;
+    transition: all 0.4s ease;
+    
+    /* Effet de lumière/hover */
+    --mouse-x: 50%; 
+    --mouse-y: 50%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle 200px at var(--mouse-x) var(--mouse-y), rgba(0, 123, 255, 0.15) 0%, transparent 80%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+.category-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: var(--shadow-hover);
+}
+
+.category-card:hover::before {
+    opacity: 1; 
+}
+
+.category-icon {
+    font-size: 3em;
+    margin-bottom: 10px;
+    transition: transform 0.3s;
+}
+
+.category-card:hover .category-icon {
+    transform: rotate(-5deg) scale(1.1); 
+}
+
+
+/* --- Quiz (Correction du bug des options) --- */
+.quiz-area {
+    margin-top: 20px;
+}
+
+.question-block {
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+}
+
+/* La structure de la liste et des inputs/labels est déjà bonne pour éviter le mélange */
+.options-list {
+    list-style: none;
+    padding: 0;
+    margin: 0; 
+    display: grid;
+    gap: 10px;
+}
+
+.options-list li {
+    display: block;
+    line-height: 0; 
+}
+
+/* Cache les vrais boutons radio (sans laisser d'espace) */
+input[type="radio"] {
+    position: absolute; 
+    opacity: 0; 
+    pointer-events: none; 
+    width: 0;
+    height: 0;
+}
+
+.options-list label {
+    display: block;
+    cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: all 0.2s;
+    font-weight: 500;
+    line-height: normal; 
+}
+
+.options-list label:hover {
+    background-color: #e6f0ff;
+    border-color: var(--primary-color);
+}
+
+/* Style de l'option sélectionnée par l'utilisateur (BLEU) */
+.options-list label.selected {
+    background-color: var(--primary-color); 
+    color: white;
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* --- STYLES DE CORRECTION (VERT/ROUGE) --- */
+
+/* Style pour la VRAIE réponse (Vert) */
+.options-list label.correct-answer {
+    background-color: #d4edda; /* Vert très clair */
+    color: #155724; /* Texte vert foncé */
+    border-color: #c3e6cb;
+    font-weight: bold;
+    animation: popIn 0.3s ease-out;
+}
+
+/* Style pour la MAUVAISE réponse sélectionnée par l'utilisateur (Rouge) */
+.options-list label.incorrect-selection {
+    background-color: #f8d7da; /* Rouge très clair */
+    color: #721c24; /* Texte rouge foncé */
+    border-color: #f5c6cb;
+    font-weight: bold;
+    text-decoration: line-through; /* Optionnel: barrer la mauvaise réponse */
+    animation: popIn 0.3s ease-out;
+}
+
+/* Empêche le hover et le curseur après la soumission */
+.options-list.review-mode label {
+    cursor: default;
+}
+.options-list.review-mode label:hover {
+    background-color: transparent !important; 
+    border-color: #ced4da; 
+}
+.options-list.review-mode label.correct-answer:hover,
+.options-list.review-mode label.incorrect-selection:hover {
+    background-color: inherit;
+    border-color: inherit;
+}
+
+
+/* --- Résultats et Partage --- */
+.score-summary {
+    padding: 30px;
+    background-color: #e6f7ff;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+}
+
+#historySection {
+    margin-top: 40
+}
